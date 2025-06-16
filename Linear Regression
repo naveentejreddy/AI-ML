@@ -1,0 +1,46 @@
+# 🎯 Real-World Linear Regression Example: Predict the student's marks based on hours studied
+# -----------------------------------------------------------
+# Input: Hours Studied (x)
+# Output: Marks (y)
+# -----------------------------------------------------------
+
+# 🔍 Linear Regression Background:
+# -----------------------------------------------------------
+# 1. Linear Regression models the relationship as: y = wx + b
+# 2. It predicts a continuous number (not probability)
+# 3. Cost Function = Mean Squared Error (MSE): (y - ŷ)^2
+# 4. Model uses gradient descent to minimize total MSE
+# -----------------------------------------------------------
+
+# Step 1: Linear Regression Dataset
+X_reg = np.array([[2], [3], [4], [5], [6]])      # Hours studied
+y_reg = np.array([50, 60, 65, 70, 80])           # Marks received
+
+# Step 2: Train Linear Regression Model
+lin_model = LinearRegression()
+lin_model.fit(X_reg, y_reg)
+
+# Step 3: Predict using Linear Regression
+x_input = 5
+predicted_marks = lin_model.predict([[x_input]])[0]
+
+# Step 4: Calculate MSE manually for x = 5
+actual_marks = 70
+mse = (actual_marks - predicted_marks) ** 2
+
+print("\n--- Linear Regression Manual Calculation ---")
+print(f"Input x = {x_input} hours")
+print(f"Predicted marks = {predicted_marks:.2f}")
+print(f"Actual marks = {actual_marks}")
+print(f"Mean Squared Error (for one point) = {mse:.4f}")
+
+# Step 5: Linear Regression Line Visualization
+plt.scatter(X_reg, y_reg, color='blue', label='Actual Data')
+plt.plot(X_reg, lin_model.predict(X_reg), color='red', label='Regression Line')
+plt.scatter(x_input, predicted_marks, color='green', label='Predicted Point')
+plt.title('Linear Regression - Hours Studied vs Marks')
+plt.xlabel('Hours Studied')
+plt.ylabel('Marks')
+plt.legend()
+plt.grid(True)
+plt.show()
